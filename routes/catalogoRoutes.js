@@ -4,7 +4,7 @@ import catalogoController from "../containers/catalogoContainer.js";
 const catalogoRoutes = Router();
 
 catalogoRoutes.get("/top10", catalogoController.getTop10);
-catalogoRoutes.post("/importar", catalogoController.importar);
+catalogoRoutes.get("/importar", catalogoController.importar);
 catalogoRoutes.get("/", catalogoController.getAllCatalogos);
 catalogoRoutes.get("/:id", catalogoController.getCatalogoById);
 catalogoRoutes.post("/", catalogoController.createCatalogo);
