@@ -30,7 +30,7 @@ class UsuarioController {
       if (!email) throw new Error("El email es requerido");
       if (!contraseña) throw new Error("La contraseña es requerida");
       const usuario = await this.usuarioService.createUsuario({ nombre, email, contraseña });
-      res.status(201).send({ success: true, message: usuario });
+      res.status(200).send({ success: true, message: usuario });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -55,6 +55,20 @@ class UsuarioController {
       res.status(400).send({ success: false, message: error.message });
     }
   };
+
+ login = async (req, res) => {
+    try {
+      
+      const {email, contraseña } = req.body;
+      if (!email) throw new Error("El email es requerido");
+      if (!contraseña) throw new Error("La contraseña es requerida");
+      const usuario = await this.usuarioService.login({email, contraseña });
+      res.status(200).send({ success: true, message: usuario });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
+
 }
 
 export default UsuarioController;

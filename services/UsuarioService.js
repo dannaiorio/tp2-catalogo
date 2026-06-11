@@ -22,6 +22,17 @@ class UsuarioService {
     const usuario = await this.usuario.create({ nombre, email, contraseña });
     return usuario;
   };
+    login = async ({ email, contraseña }) => {
+    const usuario = await this.usuario.findOne({ where: { email },
+    attributes: ["id", "nombre", "email", "contraseña"]
+   });
+   if (!usuario) throw new Error("Usuario no encontrado");
+   const validatePassword = await this.Usuario.validatePassword(contraseña, usuario.contraseña);
+   if (!validatePassword) throw new Error("Contraseña incorrecta");
+
+
+    return { id: usuario.id, nombre: usuario.nombre, email: usuario.email };
+  };
 
   updateUsuario = async (id, { nombre, email, contraseña }) => {
     const usuario = await this.usuario.findOne({ where: { id } });

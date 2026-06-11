@@ -2,7 +2,12 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../connection/sequelize.js";
 import bcrypt from "bcrypt";
 
-class Usuario extends Model{}
+class Usuario extends Model{
+    static validatePassword = async (passwordPlain, passwordHash) => {
+        const isValid = await bcrypt.compare(passwordPlain, passwordHash);
+        return isValid;
+    }
+}
 
 Usuario.init(
     {
@@ -20,7 +25,7 @@ Usuario.init(
         },
         contraseña:{
             type:DataTypes.STRING,
-            allowNule: false,
+            allowNull: false,
         },
 
     },
