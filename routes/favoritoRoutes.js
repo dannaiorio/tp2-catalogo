@@ -3,8 +3,8 @@ import favoritoController from "../containers/favoritoContainer.js";
 
 const favoritoRoutes = Router();
 
-favoritosRoutes.get("/:usuarioId", favoritoController.getFavoritosByUsuario);
-favoritosRoutes.post("/", favoritoController.addFavorito);
-favoritosRoutes.delete("/:usuarioId/:catalogoId", favoritoController.deleteFavorito); 
+favoritoRoutes.get("/:usuarioId", favoritoController.getFavoritosByUsuario);
+favoritoRoutes.post("/", favoritoController.addFavorito);
+favoritoRoutes.delete("/:usuarioId/:catalogoId", favoritoController.deleteFavorito); 
 
 export default favoritoRoutes;
