@@ -1,13 +1,17 @@
 import { Router } from "express";
 import usuarioController from "../containers/usuarioContainer.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const usuarioRoutes = Router();
 
-usuarioRoutes.get("/", usuarioController.getAllUsuarios);
-usuarioRoutes.get("/:id", usuarioController.getUsuarioById);
+//  públicas
 usuarioRoutes.post("/login", usuarioController.login);
 usuarioRoutes.post("/", usuarioController.createUsuario);
-usuarioRoutes.put("/:id", usuarioController.updateUsuario);
-usuarioRoutes.delete("/:id", usuarioController.deleteUsuario);
+
+//  privadas
+usuarioRoutes.get("/", authMiddleware, usuarioController.getAllUsuarios);
+usuarioRoutes.get("/:id", authMiddleware, usuarioController.getUsuarioById);
+usuarioRoutes.put("/:id", authMiddleware, usuarioController.updateUsuario);
+usuarioRoutes.delete("/:id", authMiddleware, usuarioController.deleteUsuario);
 
 export default usuarioRoutes;

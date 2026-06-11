@@ -1,6 +1,5 @@
 import { generateToken } from "../utils/jwt.js";
 
-
 class UsuarioService {
   constructor(usuario) {
     this.usuario = usuario;
@@ -25,16 +24,17 @@ class UsuarioService {
     const usuario = await this.usuario.create({ nombre, email, contraseña });
     return usuario;
   };
-    login = async ({ email, contraseña }) => {
+
+  login = async ({ email, contraseña }) => {
     const usuario = await this.usuario.findOne({ where: { email },
-    attributes: ["id", "nombre", "email", "contraseña"]
-   });
-   if (!usuario) throw new Error("Usuario no encontrado");
-   const validatePassword = await this.usuario.validatePassword(contraseña, usuario.contraseña);
-   if (!validatePassword) throw new Error("Contraseña incorrecta");
+      attributes: ["id", "nombre", "email", "contraseña"],
+    });
+    if (!usuario) throw new Error("Usuario no encontrado");
+    const validatePassword = await this.usuario.validatePassword(contraseña, usuario.contraseña);
+    if (!validatePassword) throw new Error("Contraseña incorrecta");
 
-
-    return { id: usuario.id, nombre: usuario.nombre, email: usuario.email };
+    const payload = { id: usuario.id, nombre: usuario.nombre };
+    return generateToken(payload);
   };
 
   updateUsuario = async (id, { nombre, email, contraseña }) => {
@@ -50,6 +50,7 @@ class UsuarioService {
     await usuario.destroy();
     return usuario;
   };
-}
+
+} 
 
 export default UsuarioService;
