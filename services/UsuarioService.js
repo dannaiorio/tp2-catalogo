@@ -1,3 +1,6 @@
+import { generateToken } from "../utils/jwt.js";
+
+
 class UsuarioService {
   constructor(usuario) {
     this.usuario = usuario;
@@ -27,7 +30,7 @@ class UsuarioService {
     attributes: ["id", "nombre", "email", "contraseña"]
    });
    if (!usuario) throw new Error("Usuario no encontrado");
-   const validatePassword = await this.Usuario.validatePassword(contraseña, usuario.contraseña);
+   const validatePassword = await this.usuario.validatePassword(contraseña, usuario.contraseña);
    if (!validatePassword) throw new Error("Contraseña incorrecta");
 
 

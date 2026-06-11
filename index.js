@@ -5,6 +5,7 @@ import { notFound } from "./middlewares/notFound.js";
 import sequelize from "./connection/sequelize.js";
 import { SERVER_PORT } from "./config/config.js";
 
+
 const app = express();
 
 app.use(express.json());
