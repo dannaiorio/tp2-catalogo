@@ -33,9 +33,22 @@ class UsuarioService {
     const validatePassword = await this.usuario.validatePassword(contraseña, usuario.contraseña);
     if (!validatePassword) throw new Error("Contraseña incorrecta");
 
-    const payload = { id: usuario.id, nombre: usuario.nombre };
-    return generateToken(payload);
+    const payload = { 
+      id: usuario.id,
+       nombre: usuario.nombre 
+      };
+      const token = generateToken(payload);
+    return {token, id:usuario.id}
   };
+  
+  me = async (payload) => {
+    const usuario = await this.usuario.findOne({
+        where: { id: payload.id },
+        attributes: ["id", "nombre", "email"],
+    });
+    if (!usuario) throw new Error("Usuario no encontrado");
+    return usuario;
+};
 
   updateUsuario = async (id, { nombre, email, contraseña }) => {
     const usuario = await this.usuario.findOne({ where: { id } });

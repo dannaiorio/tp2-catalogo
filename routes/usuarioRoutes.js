@@ -13,5 +13,6 @@ usuarioRoutes.get("/", authMiddleware, usuarioController.getAllUsuarios);
 usuarioRoutes.get("/:id", authMiddleware, usuarioController.getUsuarioById);
 usuarioRoutes.put("/:id", authMiddleware, usuarioController.updateUsuario);
 usuarioRoutes.delete("/:id", authMiddleware, usuarioController.deleteUsuario);
+usuarioRoutes.get("/me", authMiddleware, usuarioController.me);
 
 export default usuarioRoutes;
