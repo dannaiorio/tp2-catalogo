@@ -23,18 +23,18 @@ class UsuarioController {
     }
   };
 
-  createUsuario = async (req, res) => {
+ createUsuario = async (req, res) => {
     try {
-      const { nombre, email, contraseña } = req.body;
+      const { nombre, email, contraseña, rol } = req.body;
       if (!nombre) throw new Error("El nombre es requerido");
       if (!email) throw new Error("El email es requerido");
       if (!contraseña) throw new Error("La contraseña es requerida");
-      const usuario = await this.usuarioService.createUsuario({ nombre, email, contraseña });
+      const usuario = await this.usuarioService.createUsuario({ nombre, email, contraseña, rol });
       res.status(200).send({ success: true, message: usuario });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
-  };
+};
 
   updateUsuario = async (req, res) => {
     try {
