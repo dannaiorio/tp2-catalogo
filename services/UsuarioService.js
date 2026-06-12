@@ -25,7 +25,8 @@ class UsuarioService {
     return usuario;
   };
 
-  login = async ({ email, contraseña }) => {
+ // service
+login = async ({ email, contraseña }) => {
     const usuario = await this.usuario.findOne({ where: { email },
       attributes: ["id", "nombre", "email", "contraseña"],
     });
@@ -33,14 +34,10 @@ class UsuarioService {
     const validatePassword = await this.usuario.validatePassword(contraseña, usuario.contraseña);
     if (!validatePassword) throw new Error("Contraseña incorrecta");
 
-    const payload = { 
-      id: usuario.id,
-       nombre: usuario.nombre 
-      };
-      const token = generateToken(payload);
-    return {token, id:usuario.id}
-  };
-  
+    const payload = { id: usuario.id, nombre: usuario.nombre };
+    return generateToken(payload); 
+};
+
   me = async (payload) => {
     const usuario = await this.usuario.findOne({
         where: { id: payload.id },

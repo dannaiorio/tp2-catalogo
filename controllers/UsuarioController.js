@@ -63,6 +63,7 @@ login = async (req, res) => {
         if (!contraseña) throw new Error("La contraseña es requerida");
 
         const token = await this.usuarioService.login({ email, contraseña });
+        console.log("Token generado:", token);
 
         res.cookie("token", token, {
             httpOnly: true,
