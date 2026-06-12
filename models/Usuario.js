@@ -27,6 +27,10 @@ Usuario.init(
             type:DataTypes.STRING,
             allowNull: false,
         },
+        rolId:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+        },
 
     },
     {
