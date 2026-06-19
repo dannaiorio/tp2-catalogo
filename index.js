@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 app.use(router);
 
-await sequelize.sync({ alter: false });
+await sequelize.sync({ alter: true });
 
 app.use(notFound);
 
