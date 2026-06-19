@@ -85,6 +85,15 @@ me = async (req, res) => {
     }
 };
 
+  logout = async (req, res) => {
+    try {
+      res.clearCookie("token", { httpOnly: true });
+      res.status(200).send({ success: true, message: "Logout exitoso" });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
+
 }
 
 export default UsuarioController;

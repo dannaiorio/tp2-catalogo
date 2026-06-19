@@ -8,6 +8,7 @@ const usuarioRoutes = Router();
 //  públicas
 usuarioRoutes.post("/login", usuarioController.login);
 usuarioRoutes.post("/", usuarioController.createUsuario);
+usuarioRoutes.post("/logout", usuarioController.logout);
 
 //  privadas
 usuarioRoutes.get("/", authMiddleware, usuarioController.getAllUsuarios);
