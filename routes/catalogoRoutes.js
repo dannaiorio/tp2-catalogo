@@ -4,10 +4,13 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 import isAdmin from "../middlewares/isAdmin.js";
 
 const catalogoRoutes = Router();
+catalogoRoutes.get("/exportar", authMiddleware, isAdmin, catalogoController.exportarCSV);
 
 catalogoRoutes.get("/top10", catalogoController.getTop10);
 catalogoRoutes.get("/importar", catalogoController.importar);
+
 catalogoRoutes.get("/", catalogoController.getAllCatalogos);
+
 catalogoRoutes.get("/:id", catalogoController.getCatalogoById);
 catalogoRoutes.post("/", authMiddleware, isAdmin, catalogoController.createCatalogo);
 catalogoRoutes.put("/:id", authMiddleware, isAdmin, catalogoController.updateCatalogo);

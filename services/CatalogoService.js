@@ -1,6 +1,8 @@
 class CatalogoService {
   constructor(catalogo) {
     this.catalogo = catalogo;
+    console.log("Métodos:", Object.getOwnPropertyNames(CatalogoService.prototype));
+     console.log("exportarCSV existe:", typeof this.exportarCSV);
   }
 
   getAllCatalogos = async ({ tipo, genero } = {}) => {
@@ -51,6 +53,19 @@ class CatalogoService {
     const resultado = await this.catalogo.bulkCreate(todos, { ignoreDuplicates: true });
     return resultado;
   };
+
+
+exportarCSV = async () => {
+    const catalogos = await this.catalogo.findAll();
+    
+    const header = "id,titulo,descripcion,año,puntuacion,genero,tipo\n";
+    const filas = catalogos.map(c => 
+        `${c.id},"${c.titulo}","${c.descripcion}",${c.año},${c.puntuacion},"${c.genero}","${c.tipo}"`
+    ).join("\n");
+    
+    return header + filas;
+};
+
 }
 
 export default CatalogoService;
