@@ -75,6 +75,17 @@ class CatalogoController {
       res.status(400).send({ success: false, message: error.message });
     }
   };
+
+  exportarCSV = async (req, res) => {
+    try {
+        const csv = await this.catalogoService.exportarCSV();
+        res.setHeader("Content-Type", "text/csv");
+        res.setHeader("Content-Disposition", "attachment; filename=catalogos.csv");
+        res.status(200).send(csv);
+    } catch (error) {
+        res.status(400).send({ success: false, message: error.message });
+    }
+};
 }
 
 export default CatalogoController;

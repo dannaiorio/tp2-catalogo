@@ -5,6 +5,11 @@ import Rol from "./Rol.js";
 
 Usuario.belongsToMany(Catalogo,{through:Favorito, foreignKey:"usuarioId"});
 Catalogo.belongsToMany(Usuario,{through:Favorito, foreignKey:"catalogoId"});
+
+// asociaciones directas para estadísticas
+Favorito.belongsTo(Catalogo, { foreignKey: "catalogoId" });
+Favorito.belongsTo(Usuario, { foreignKey: "usuarioId" });
+
 //asociacion rol con usuario
 Usuario.belongsTo(Rol,{foreignKey:"rolId", as:"rol"});
 Rol.hasMany(Usuario, {foreignKey:"rolId", as:"usuarios"});
