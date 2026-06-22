@@ -3,17 +3,18 @@ class FavoritoController {
     this.favoritoService = service;
   }
 
-  getFavoritosByUsuario = async (req, res) => {
+  getFavoritosByUsuario = async (req, res, next) => {
     try {
       const { usuarioId } = req.params;
       const favoritos = await this.favoritoService.getFavoritosByUsuario(usuarioId);
       res.status(200).send({ success: true, message: favoritos });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      next(error);
+      
     }
   };
 
-  addFavorito = async (req, res) => {
+  addFavorito = async (req, res, next) => {
     try {
       const { usuarioId, catalogoId } = req.body;
       if (!usuarioId) throw new Error("El usuarioId es requerido");
@@ -21,17 +22,17 @@ class FavoritoController {
       const favorito = await this.favoritoService.addFavorito({ usuarioId, catalogoId });
       res.status(201).send({ success: true, message: favorito });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      next(error);
     }
   };
 
-  deleteFavorito = async (req, res) => {
+  deleteFavorito = async (req, res, next) => {
     try {
       const { usuarioId, catalogoId } = req.params;
       const favorito = await this.favoritoService.deleteFavorito({ usuarioId, catalogoId });
       res.status(200).send({ success: true, message: favorito });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      next(error);
     }
   };
 }

@@ -23,7 +23,24 @@ app.use(morgan("dev"));
 
 app.use(router);
 
-await sequelize.sync({ alter: true });
+// middleware de errores global
+app.use((err, req, res, next) => {
+    if (err.name === "SequelizeValidationError") {
+        return res.status(400).json({ 
+            success: false, 
+            message: err.errors[0].message 
+        });
+    }
+    if (err.name === "SequelizeUniqueConstraintError") {
+        return res.status(400).json({ 
+            success: false, 
+            message: "Ya existe un registro con ese valor" 
+        });
+    }
+    res.status(500).json({ success: false, message: err.message });
+});
+
+await sequelize.sync({ alter: false });
 
 app.use(notFound);
 
