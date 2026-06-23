@@ -18,7 +18,14 @@ class FavoritoService {
     });
     if (favoritoExistente) throw new Error("Ya está en favoritos");
     const favorito = await this.favorito.create({ usuarioId, catalogoId });
-    return favorito;
+    const favoritoConCatalogo = await this.favorito.findOne({
+      where:{usuarioId, catalogoId},
+      include:[{
+        model:this.catalogo,
+        attributes:["titulo","tipo","genero"]
+      }],
+    });
+    return favoritoConCatalogo;
   };
 
   deleteFavorito = async ({ usuarioId, catalogoId }) => {
