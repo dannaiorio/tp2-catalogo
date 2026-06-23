@@ -6,7 +6,7 @@ import isAdmin from "../middlewares/isAdmin.js";
 const estadisticasRoutes = Router();
 
 
-estadisticasRoutes.get("/exportar", estadisticasController.exportarCSV);
+estadisticasRoutes.get("/exportar", authMiddleware, isAdmin, estadisticasController.exportarCSV);
 estadisticasRoutes.get("/", authMiddleware, isAdmin, estadisticasController.getEstadisticas);
 
 export default estadisticasRoutes;
