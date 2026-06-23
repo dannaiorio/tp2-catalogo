@@ -8,10 +8,30 @@ Favorito.init(
     usuarioId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        isInt: {
+          args: true,
+          msg: "El usuarioId debe ser un número entero.",
+        },
+        min: {
+          args: [1],
+          msg: "El usuarioId debe ser un número entero positivo.",
+        },
+      },
     },
     catalogoId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        inInt: {
+          args: true,
+          msg: "El catalogoId debe ser un número entero.",
+        },
+        min: {
+          args: [1],
+          msg: "El catalogoId debe ser un número entero positivo.",
+        },
+      },
     },
   },
   {

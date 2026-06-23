@@ -3,7 +3,7 @@ class EstadisticasController {
         this.estadisticasService = service;
     }
 
-  getEstadisticas = async (req, res) => {
+  getEstadisticas = async (req, res, next) => {
     try {
       const topCatalogos = await this.estadisticasService.getTopCatalogos();
       const cantidadPorTipo = await this.estadisticasService.getCantidadPorTipo();
@@ -14,11 +14,11 @@ class EstadisticasController {
         message: { topCatalogos, cantidadPorTipo,  promedioPorGenero, }
       });
     } catch (error) {
-      res.status(400).send({ success: false, message: error.message });
+      next(error);
     }
   };
 
-  exportarCSV = async (req, res) => {
+  exportarCSV = async (req, res, next) => {
     try {
        console.log("exportarCSV en service desde controller:", typeof this.estadisticasService.exportarCSV);
         const csv = await this.estadisticasService.exportarCSV();
@@ -26,7 +26,7 @@ class EstadisticasController {
         res.setHeader("Content-Disposition", "attachment; filename=estadisticas.csv");
         res.status(200).send(csv);
     } catch (error) {
-        res.status(400).send({ success: false, message: error.message });
+        next(error);
     }
   };
 }
