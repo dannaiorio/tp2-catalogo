@@ -1,5 +1,6 @@
 # Catálogo de Películas y Series - API (TP2)
 
+API REST de un catálogo de películas y series. Los usuarios pueden registrarse, iniciar sesión y gestionar sus favoritos. Cuenta con un sistema de roles (admin y usuario común), autenticación con JWT, estadísticas del catálogo e importación/exportación de datos en CSV.
 
 ## Paquetes Utilizados (Dependencias)
 
@@ -21,6 +22,16 @@ El proyecto utiliza las siguientes dependencias clave:
 
 ### 1. Clonar el repositorio e instalar dependencias
 Entra a la carpeta del proyecto y ejecuta:
+
+```bash
+git clone https://github.com/dannaiorio/tp2-catalogo
+```
+
+```bash
+cd tp2-catalogo
+```
+
+
 ```bash
 npm install
 ```
@@ -66,7 +77,7 @@ JWT_SECRET="tu_clave_secreta_jwt"
 ### Catálogo (`/catalogos`)
 *   `GET /catalogos/`: Lista todos los elementos del catálogo (películas y series). Admite filtros opcionales.
 *   `GET /catalogos/top10`: Obtiene el Top 10 de películas/series mejor valoradas.
-*   `GET /catalogos/importar`: Importa elementos de catálogo desde un archivo CSV o fuente predeterminada.
+*   `GET /catalogos/importar`: Importa elementos de catálogo desde un archivo CSV o de una API mockachino.
 *   `GET /catalogos/exportar`: Exporta la lista de catálogos en formato CSV *(Requiere ser Administrador)*.
 *   `GET /catalogos/:id`: Obtiene el detalle de un elemento por su ID.
 *   `POST /catalogos/`: Registra una nueva película o serie *(Requiere ser Administrador)*.
@@ -76,7 +87,6 @@ JWT_SECRET="tu_clave_secreta_jwt"
 ### Favoritos (`/favoritos`)
 *   `GET /favoritos/:usuarioId`: Obtiene la lista de elementos favoritos de un usuario en particular.
 *   `POST /favoritos/`: Agrega un elemento del catálogo a la lista de favoritos del usuario autenticado *(Requiere autenticación)*.
-    *   *Body esperado:* `{ "catalogoId": 1 }`
 *   `DELETE /favoritos/:usuarioId/:catalogoId`: Elimina un elemento específico de la lista de favoritos de un usuario *(Requiere autenticación)*.
 
 ### Roles (`/roles`)
