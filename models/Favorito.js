@@ -9,7 +9,7 @@ Favorito.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isInt: {
+        isNumeric: {
           args: true,
           msg: "El usuarioId debe ser un número entero.",
         },
@@ -23,7 +23,7 @@ Favorito.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        inInt: {
+        isNumeric: {
           args: true,
           msg: "El catalogoId debe ser un número entero.",
         },
