@@ -5,17 +5,19 @@ class Catalogo extends Model {}
 
 Catalogo.init(
   {
-    titulo: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      validate: {
-        len:{args: [2, 80], msg: "El título debe tener entre 2 y 80 caracteres"},
-        notEmpty: { msg: "El título no puede estar vacío" },
-        isAlphanumeric: { msg: "El título solo puede contener letras y números" },
-
-
-      },
+  titulo: {
+  type: DataTypes.STRING(255),
+  allowNull: false,
+  validate: {
+    len: { args: [2, 80], msg: "El título debe tener entre 2 y 80 caracteres" },
+    notEmpty: { msg: "El título no puede estar vacío" },
+    is: {
+      args: /^[a-zA-Z0-9\s]+$/,
+      msg: "El título solo puede contener letras, números y espacios"
     },
+  },
+},
+
     descripcion: {
   type: DataTypes.TEXT,
   allowNull: false,
@@ -46,14 +48,17 @@ Catalogo.init(
         max: { args: [10], msg: "La puntuación debe ser menor o igual a 10" },
       },
     },
-    genero: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      validate: {
-        notEmpty: { msg: "El género no puede estar vacío" },
-        isAlpha: { msg: "El género solo puede contener letras" },
-      },
+   genero: {
+  type: DataTypes.STRING(100),
+  allowNull: false,
+  validate: {
+    notEmpty: { msg: "El género no puede estar vacío" },
+    is: {
+      args: /^[a-zA-Z\s]+$/,  // letras Y espacios, sin números
+      msg: "El género solo puede contener letras y espacios"
     },
+  },
+},
     poster: {
       type: DataTypes.STRING(500),
       allowNull: true,
