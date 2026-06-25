@@ -99,3 +99,15 @@ JWT_SECRET="tu_clave_secreta_jwt"
 ### Estadísticas (`/estadisticas`)
 *   `GET /estadisticas/`: Retorna estadísticas generales del sistema, como cantidad de usuarios, películas, favoritos, etc. *(Requiere ser Administrador)*.
 *   `GET /estadisticas/exportar`: Exporta estadísticas generales a formato CSV.
+
+
+### Códigos de Respuesta HTTP
+
+Código	Significado
+200  	OK — request exitoso
+201 	Created — recurso creado exitosamente
+400 	Bad Request — datos inválidos o faltantes
+401 	Unauthorized — sin token o token inválido
+403	    Forbidden — no tenés permisos de administrador
+404	    Not Found — recurso o ruta no encontrada
+500 	Internal Server Error — error inesperado del servidor
