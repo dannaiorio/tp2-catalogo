@@ -5,7 +5,7 @@ import { Catalogo, Usuario, Favorito } from "../models/index.js";
 
 class EstadisticasService {
   constructor() {
-        console.log("exportarCSV en service:", typeof this.exportarCSV);
+        
     }
 
  getTopCatalogos = async () => {

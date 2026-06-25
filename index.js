@@ -6,6 +6,7 @@ import sequelize from "./connection/sequelize.js";
 import { SERVER_PORT } from "./config/config.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -23,22 +24,7 @@ app.use(morgan("dev"));
 
 app.use(router);
 
-// middleware de errores global
-app.use((err, req, res, next) => {
-    if (err.name === "SequelizeValidationError") {
-        return res.status(400).json({ 
-            success: false, 
-            message: err.errors[0].message 
-        });
-    }
-    if (err.name === "SequelizeUniqueConstraintError") {
-        return res.status(400).json({ 
-            success: false, 
-            message: "Ya existe un registro con ese valor" 
-        });
-    }
-    res.status(500).json({ success: false, message: err.message });
-});
+app.use(errorHandler);
 
 await sequelize.sync({ alter: false });
 
