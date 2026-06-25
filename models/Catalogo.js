@@ -9,7 +9,7 @@ Catalogo.init(
       type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
-        len: [2, 80], msg: "El título debe tener entre 2 y 80 caracteres",
+        len:{args: [2, 80], msg: "El título debe tener entre 2 y 80 caracteres"},
         notEmpty: { msg: "El título no puede estar vacío" },
         isAlphanumeric: { msg: "El título solo puede contener letras y números" },
 
@@ -17,13 +17,17 @@ Catalogo.init(
       },
     },
     descripcion: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notEmpty: { msg: "La descripción no puede estar vacía" },
-        isAlphanumeric: { msg: "La descripción solo puede contener letras y números" },
-        len: [10, 1000], msg: "La descripción debe tener entre 10 y 1000 caracteres"
-      },
+  type: DataTypes.TEXT,
+  allowNull: false,
+  validate: {
+    notEmpty: { msg: "La descripción no puede estar vacía" },
+    is: {
+      args: /^[a-zA-Z0-9\s]+$/, // letras, números Y espacios
+      msg: "La descripción solo puede contener letras, números y espacios"
+    },
+    len: { args: [10, 1000], msg: "La descripción debe tener entre 10 y 1000 caracteres" }
+  },
+
     },
     año: {
       type: DataTypes.INTEGER,

@@ -1,8 +1,7 @@
 class CatalogoService {
   constructor(catalogo) {
     this.catalogo = catalogo;
-    console.log("Métodos:", Object.getOwnPropertyNames(CatalogoService.prototype));
-     console.log("exportarCSV existe:", typeof this.exportarCSV);
+    
   }
 
   getAllCatalogos = async ({ tipo, genero } = {}) => {
