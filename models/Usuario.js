@@ -17,7 +17,7 @@ Usuario.init(
             validate: {
                 notEmpty: {msg: "El nombre no puede estar vacío"},
                 len: {args: [2, 100], msg: "El nombre debe tener entre 2 y 100 caracteres"},
-                isAlpha: {msg: "El nombre solo puede contener letras"},
+                isAlpha: {msg: "El nombre solo puede contener letras sin espacios"},
             },
         },
         email:{
